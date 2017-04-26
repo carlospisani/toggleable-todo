@@ -1,0 +1,9 @@
+<input id="user" class="form-control"  (keyup)="changeUser()" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" placeholder="User" type="text">
+<div class="container">
+  <form (submit)="addNew()" class="form-inline">
+    <input id="newTodo" class="form-control"  [(ngModel)]="text" [ngModelOptions]="{standalone: true}" placeholder="New todo item" type="text">
+  </form>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let t of todos"><button class="btn btn-danger btn-small deleteBtn"  (click)="deleteItem(t.text)">x</button>{{t.text}}</li>
+  </ul>
+</div>

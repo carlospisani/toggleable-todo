@@ -1,0 +1,5 @@
+[
+    { "name": "tg-get-on-database", "enable": true, "users": ["pisani","bill","paul",""] },
+    { "name": "tg-set-on-database", "enable": true, "users": ["pisani","bill"] },
+    { "name": "tg-del-on-database", "enable": true, "users": ["pisani","paul"] }
+]

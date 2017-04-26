@@ -1,0 +1,20 @@
+#user{
+    position:absolute;
+    top:4px;
+    right:4px;
+    border:0px solid white;
+    width:130px;
+    height:42px;
+    color:white !important;;
+    background-color: transparent;
+    text-align: right;
+    outline: none;
+}
+#newTodo{
+    font-weight: bolder; 
+    height:58px;
+}
+.deleteBtn{
+    margin-right: 13px; 
+    width:40px;
+}

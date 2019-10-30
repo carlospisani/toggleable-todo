@@ -14,96 +14,91 @@ import { TgRouterService } from '../tg-router.service';
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent implements OnInit {
-
-  /* constructors */
-  constructor(private _todoService : TodoService, private _tgRouterService : TgRouterService) {}
-  
   /* properties */
   resolve = this._tgRouterService.resolve;
   todos;
   text;
   user;
-    
+
   /* façade */
   facade = {
-    toggle:{
-
+    toggle: {
       getOnDatabase: () => {
-        if (this.resolve("tg-get-on-database",this.user))
-        { 
+        if (this.resolve('tg-get-on-database', this.user)) {
           this.todos = this._todoService.getTodos();
-        }
-        else
-        {
-          //Código original
-          if (this.todos==="" || this.todos===null || this.todos===undefined)
-              this.todos = [
-                {text : "Fazer compras"},
-                {text : "Estudar matemática"},
-                {text : "Carregar a furadeira elétrica"},
-                {text : "Levar o cachorro para passear"}
-              ];
+        } else {
+          // Código original
+          if (
+            this.todos === '' ||
+            this.todos === null ||
+            this.todos === undefined
+          ) {
+            this.todos = [
+              { text: 'Fazer compras' },
+              { text: 'Estudar matemática' },
+              { text: 'Carregar a furadeira elétrica' },
+              { text: 'Levar o cachorro para passear' }
+            ];
+          }
         }
       },
 
-      setOnDatabase: (val) =>{
-        if (this.resolve("tg-set-on-database",this.user)) 
-        {
+      setOnDatabase: val => {
+        if (this.resolve('tg-set-on-database', this.user)) {
           this._todoService.setTodos(val);
           this.facade.toggle.getOnDatabase();
-        }
-        else
-        {
-          //Código original, perceba que nem mesmo a variável "val" foi usada 
-          //para manter o código original o mais próximo possível 
-          this.todos.push({text:this.text});
+        } else {
+          // Código original, perceba que nem mesmo a variável "val" foi usada
+          // para manter o código original o mais próximo possível
+          this.todos.push({ text: this.text });
         }
       },
 
-      delOnDatabase: (val) =>{
-        if (this.resolve("tg-del-on-database",this.user)) 
-        {
+      delOnDatabase: val => {
+        if (this.resolve('tg-del-on-database', this.user)) {
           this.todos = this._todoService.deleteTodo(val);
           this.facade.toggle.getOnDatabase();
-        }
-        else
-        {
-          //Código original, neste caso "val" seria utilizado de qualquer forma
-          //por isso recebeu itemText do valor original
-          for (var i=0; i<this.todos.length; i++){
-            if (this.todos[i].text==val){
-              this.todos.splice(i,1);
+        } else {
+          // Código original, neste caso "val" seria utilizado de qualquer forma
+          // por isso recebeu itemText do valor original
+          for (let i = 0; i < this.todos.length; i++) {
+            if (this.todos[i].text === val) {
+              this.todos.splice(i, 1);
             }
           }
         }
       }
-
     }
-  }
+  };
+  /* constructors */
+  constructor(
+    private _todoService: TodoService,
+    private _tgRouterService: TgRouterService
+  ) {}
 
   /* methods */
   ngOnInit() {
-    this.text = "";
-    this.user = "";
-   
-    //o código original foi para o ELSE do método abaixo
+    this.text = '';
+    this.user = '';
+
+    // o código original foi para o ELSE do método abaixo
     this.facade.toggle.getOnDatabase();
   }
 
-  changeUser(){
-    //o código original foi para o ELSE do método abaixo
+  changeUser() {
+    // o código original foi para o ELSE do método abaixo
     this.facade.toggle.getOnDatabase();
   }
 
-  addNew(){
-    //o código original foi para o ELSE do método abaixo
+  addNew() {
+    // o código original foi para o ELSE do método abaixo
     this.facade.toggle.setOnDatabase(this.text);
-    
-    this.text = "";
+
+    this.text = '';
   }
 
-  deleteItem(itemText){
-    //o código original foi para o ELSE do método abaixo
+  deleteItem(itemText) {
+    // o código original foi para o ELSE do método abaixo
     this.facade.toggle.delOnDatabase(itemText);
   }
 }

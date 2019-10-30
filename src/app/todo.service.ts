@@ -8,35 +8,35 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TodoService {
-
   /* constructors */
-  constructor() { 
-    if (localStorage.getItem('todos')===null || localStorage.getItem('todos')===undefined){
-      var values = [];
-      localStorage.setItem('todos',JSON.stringify(values));
+  constructor() {
+    if (
+      localStorage.getItem('todos') === null ||
+      localStorage.getItem('todos') === undefined
+    ) {
+      const values = [];
+      localStorage.setItem('todos', JSON.stringify(values));
     }
   }
 
   /* methods */
-  getTodos(){
+  getTodos() {
     return JSON.parse(localStorage.getItem('todos'));
   }
 
-  setTodos(name){
-    var data = JSON.parse(localStorage.getItem('todos'));
-    data.push({text:name});
-    localStorage.setItem('todos',JSON.stringify(data));
+  setTodos(name: string) {
+    const data = JSON.parse(localStorage.getItem('todos'));
+    data.push({ text: name });
+    localStorage.setItem('todos', JSON.stringify(data));
   }
 
-  deleteTodo(name){
-    var data = JSON.parse(localStorage.getItem('todos'));
-
-    for (var i=0; i< data.length; i++){
-      if (data[i].text==name){
-        data.splice(i,1);
-      }
+  deleteTodo(name: string) {
+    const data = JSON.parse(localStorage.getItem('todos'));
+    const index = data.findIndex((x: { name: any }) => x.name === name);
+    if (index > -1) {
+      data.splice(index, 1);
     }
 
-    localStorage.setItem('todos',JSON.stringify(data));
+    localStorage.setItem('todos', JSON.stringify(data));
   }
 }
